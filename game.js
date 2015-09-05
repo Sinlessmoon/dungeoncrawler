@@ -50,7 +50,7 @@ window.onload = function() {
 	canvas.style.height = "900px";
 	ctx = canvas.getContext('2d');
 
-	window.onkeyup = function(e) {
+	window.onkeydown = function(e) {
 		switch(e.which) {
 			case 37:
 				player.moveLeft();

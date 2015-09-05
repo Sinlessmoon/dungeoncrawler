@@ -9,7 +9,7 @@ function Player(tile, image) {
 	};
 
 	this.draw = function(ctx) {
-		ctx.drawImage(self.image, self.tile.x, self.tile.y);
+		ctx.drawImage(self.image, self.tile.dx, self.tile.dy);
 	};
 
 	this.moveUp = function() {
