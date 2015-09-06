@@ -39,6 +39,16 @@ function update() {
 	// TODO: Update logic
 }
 
+//This could most likely be moved to update.
+function tickUpdate() {
+
+	for(var i = 0; i < monsters.length; i++) {
+
+		monsters[i].update();
+	}
+
+}
+
 function draw() {
 	ctx.fillStyle = "#000";
 	ctx.fillRect(0, 0, WIDTH, HEIGHT);
@@ -78,6 +88,8 @@ window.onload = function() {
 				break;
 		}
 	};
+
+	window.setInterval(function () {tickUpdate()}, 1500);
 
 	init();
 };
