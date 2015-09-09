@@ -4,14 +4,8 @@ var FPS = 60;
 
 var canvas, ctx;
 
-<<<<<<< HEAD
-var tiles = [];
-var monsters = [];
-
-var monstersToGenerate = 5;
-=======
 var floor;
->>>>>>> master
+
 
 var player;
 
