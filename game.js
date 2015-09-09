@@ -1,5 +1,7 @@
-var WIDTH = 1952;
-var HEIGHT = 1952;
+var WIDTH = 672;
+var HEIGHT = 672;
+var LEVEL_W = 61;
+var LEVEL_H = 61;
 var FPS = 60;
 
 var canvas, ctx;
@@ -16,7 +18,7 @@ function init() {
 	Content.add_image("player", "./image/player.png");
 	Content.finalize();
 
-	floor = new DungeonFloor(60, 60, 50);
+	floor = new DungeonFloor(LEVEL_W, LEVEL_H, 500);
 
 	var start_tile = floor.tiles[0];
 	for(var i = 0; i < floor.tiles.length; i++) {
@@ -41,11 +43,16 @@ function draw() {
 	ctx.fillStyle = "#000";
 	ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
-	// TODO: More drawing logic
+	// Draw Game Objects
+	ctx.save();
+	ctx.translate(player.camera.offsetX, player.camera.offsetY);
 	for(var i = 0; i < floor.tiles.length; i++) {
 		floor.tiles[i].draw(ctx);
 	}
 	player.draw(ctx);
+	ctx.restore();
+
+	// Draw UI
 }
 
 window.onload = function() {
@@ -78,4 +85,8 @@ window.onload = function() {
 
 function rand(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function clamp(num, min, max) {
+	return Math.min(Math.max(num, min), max);
 }
