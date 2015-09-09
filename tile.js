@@ -1,4 +1,4 @@
-function Tile(x, y, image, solid) {
+function Tile(x, y, image, solid, transparent) {
 	var self = this;
 
 	this.x = x;
@@ -8,6 +8,7 @@ function Tile(x, y, image, solid) {
 	this.image = image;
 
 	this.solid = solid;
+	this.transparent = transparent;
 
 	this.up = null;
 	this.down = null;
