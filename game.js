@@ -8,8 +8,10 @@ var canvas, ctx;
 
 var floor;
 
-
 var player;
+
+var update_delay = 0.5 * FPS;
+var update_current = update_delay;
 
 function init() {
 	// TODO: Initialize the game (load graphics, etc.)
@@ -38,17 +40,16 @@ function main() {
 }
 
 function update() {
-	// TODO: Update logic
-}
+	if(update_current <= 0) {
+		// TODO: Update logic
+		/*for(var i = 0; i < monsters.length; i++) {
+			monsters[i].update();
+		}*/
 
-//This could most likely be moved to update.
-function tickUpdate() {
-
-	for(var i = 0; i < monsters.length; i++) {
-
-		monsters[i].update();
+		update_current = update_delay;
+	} else {
+		update_current--;
 	}
-
 }
 
 function draw() {
@@ -62,9 +63,10 @@ function draw() {
 		floor.tiles[i].draw(ctx);
 	}
 
-	for(var o = 0; o < monsters.length; o++){
-		monsters[o].draw(ctx);
-	}
+	/*for(var i = 0; i < monsters.length; i++){
+		monsters[i].draw(ctx);
+	}*/
+
 	player.draw(ctx);
 	ctx.restore();
 
