@@ -1,10 +1,10 @@
-var WIDTH = 1920;
-var HEIGHT = 1920;
+var WIDTH = 1952;
+var HEIGHT = 1952;
 var FPS = 60;
 
 var canvas, ctx;
 
-var tiles = [];
+var floor;
 
 var player;
 
@@ -16,10 +16,16 @@ function init() {
 	Content.add_image("player", "./image/player.png");
 	Content.finalize();
 
-	var generator = new DungeonGenerator(60, 60, 10000, ctx);
-	tiles = generator.generate();
+	floor = new DungeonFloor(60, 60, 50);
 
-	player = new Player(tiles[1+(1*60)], Content.player);
+	var start_tile = floor.tiles[0];
+	for(var i = 0; i < floor.tiles.length; i++) {
+		if(!floor.tiles[i].solid) {
+			start_tile = floor.tiles[i];
+			break;
+		}
+	}
+	player = new Player(start_tile, Content.player);
 }
 
 function main() {
@@ -36,8 +42,8 @@ function draw() {
 	ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
 	// TODO: More drawing logic
-	for(var i = 0; i < tiles.length; i++) {
-		tiles[i].draw(ctx);
+	for(var i = 0; i < floor.tiles.length; i++) {
+		floor.tiles[i].draw(ctx);
 	}
 	player.draw(ctx);
 }
@@ -46,8 +52,8 @@ window.onload = function() {
 	canvas = document.getElementById("game");
 	canvas.width = WIDTH;
 	canvas.height = HEIGHT;
-	canvas.style.width = "900px";
-	canvas.style.height = "900px";
+	canvas.style.width = "640px";
+	canvas.style.height = "640px";
 	ctx = canvas.getContext('2d');
 
 	window.onkeyup = function(e) {
