@@ -68,8 +68,14 @@ function draw() {
 	// Draw Game Objects
 	ctx.save();
 	ctx.translate(player.camera.offsetX, player.camera.offsetY);
+
+	// Tiles and shadow mask
+	var shadows = document.createElement('canvas');
+	shadows.width = LEVEL_W*32;
+	shadows.height = LEVEL_H*32;
+	var sctx = shadows.getContext('2d');
 	for(var i = 0; i < floor.tiles.length; i++) {
-		floor.tiles[i].draw(ctx);
+		floor.tiles[i].draw(ctx, sctx);
 	}
 
 	/*for(var i = 0; i < monsters.length; i++){
@@ -77,6 +83,7 @@ function draw() {
 	}*/
 
 	player.draw(ctx);
+	ctx.drawImage(shadows, 0, 0);
 	ctx.restore();
 
 	// Draw UI

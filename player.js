@@ -33,6 +33,11 @@ function Player(tile, image) {
 			self.camera.update();
 
 			if(self.x == self.target.dx && self.y == self.target.dy) self.tile = self.target;
+			for(var i = 0; i < floor.tiles.length; i++) {
+				floor.tiles[i].light = 0;
+				floor.tiles[i].lit = false;
+			}
+			self.tile.apply_light(1, "rgba(0, 0, 0, 1)", "center");
 		} else {
 			if(keyboard.IsKeyDown(Keys.Left)) {
 				self.moveLeft();
