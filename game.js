@@ -5,6 +5,7 @@ var LEVEL_H = 61;
 var FPS = 60;
 
 var canvas, ctx;
+var keyboard;
 
 var floor;
 
@@ -14,6 +15,10 @@ var update_delay = 0.5 * FPS;
 var update_current = update_delay;
 
 function init() {
+	keyboard = new Keyboard();
+	window.onkeydown = keyboard.keydown;
+	window.onkeyup = keyboard.keyup;
+
 	// TODO: Initialize the game (load graphics, etc.)
 	Content.add_image("floor", "./image/floor.png");
 	Content.add_image("wall", "./image/wall.png");
@@ -40,6 +45,10 @@ function main() {
 }
 
 function update() {
+	keyboard.update();
+
+	player.update();
+
 	if(update_current <= 0) {
 		// TODO: Update logic
 		/*for(var i = 0; i < monsters.length; i++) {
@@ -80,25 +89,6 @@ window.onload = function() {
 	canvas.style.width = "640px";
 	canvas.style.height = "640px";
 	ctx = canvas.getContext('2d');
-
-	window.onkeydown = function(e) {
-		switch(e.which) {
-			case 37:
-				player.moveLeft();
-				break;
-			case 38:
-				player.moveUp();
-				break;
-			case 39:
-				player.moveRight();
-				break;
-			case 40:
-				player.moveDown();
-				break;
-		}
-	};
-
-	window.setInterval(function () {tickUpdate()}, 1500);
 
 	init();
 };

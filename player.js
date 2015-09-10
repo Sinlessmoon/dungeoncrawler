@@ -2,14 +2,19 @@ function Player(tile, image) {
 	var self = this;
 
 	this.tile = tile;
+	this.target = tile;
 	this.image = image;
 
+	this.x = tile.dx;
+	this.y = tile.dy;
+	this.speed = 8;
+
 	this.camera = {
-		offsetX:-(clamp(self.tile.dx - 320, 0, (LEVEL_W*32) - WIDTH)),
-		offsetY:-(clamp(self.tile.dy - 320, 0, (LEVEL_H*32) - HEIGHT)),
+		offsetX:-(clamp(self.x - 320, 0, (LEVEL_W*32) - WIDTH)),
+		offsetY:-(clamp(self.y - 320, 0, (LEVEL_H*32) - HEIGHT)),
 		update:function() {
-			this.offsetX = -(clamp(self.tile.dx - 320, 0, (LEVEL_W*32) - WIDTH));
-			this.offsetY = -(clamp(self.tile.dy - 320, 0, (LEVEL_H*32) - HEIGHT));
+			this.offsetX = -(clamp(self.x - 320, 0, (LEVEL_W*32) - WIDTH));
+			this.offsetY = -(clamp(self.y - 320, 0, (LEVEL_H*32) - HEIGHT));
 
 			if(this.offsetX > 0) this.offsetX = 0;
 			if(this.offsetY > 0) this.offsetY = 0;
@@ -17,38 +22,55 @@ function Player(tile, image) {
 	};
 
 	this.update = function() {
+		if(self.tile != self.target) {
+			if(self.target.dx != self.x) {
+				if(self.x < self.target.dx) self.x += 32 / self.speed;
+				else if(self.x > self.target.dx) self.x -= 32 / self.speed;
+			} else {
+				if(self.y < self.target.dy) self.y += 32 / self.speed;
+				else if(self.y > self.target.dy) self.y -= 32 / self.speed;
+			}
+			self.camera.update();
 
+			if(self.x == self.target.dx && self.y == self.target.dy) self.tile = self.target;
+		} else {
+			if(keyboard.IsKeyDown(Keys.Left)) {
+				self.moveLeft();
+			} else if(keyboard.IsKeyDown(Keys.Right)) {
+				self.moveRight();
+			} else if(keyboard.IsKeyDown(Keys.Up)) {
+				self.moveUp();
+			} else if(keyboard.IsKeyDown(Keys.Down)) {
+				self.moveDown();
+			}
+		}
 	};
 
 	this.draw = function(ctx) {
-		ctx.drawImage(self.image, self.tile.dx, self.tile.dy);
+		ctx.drawImage(self.image, self.x, self.y);
 	};
 
 	this.moveUp = function() {
 		if(self.tile.up != null && !self.tile.up.solid) {
-			self.tile = self.tile.up;
-			self.camera.update();
+			self.target = self.tile.up;
 		}
 	};
 
 	this.moveDown = function() {
 		if(self.tile.down != null && !self.tile.down.solid) {
-			self.tile = self.tile.down;
-			self.camera.update();
+			self.target = self.tile.down;
 		}
 	};
 
 	this.moveLeft = function() {
 		if(self.tile.left != null && !self.tile.left.solid) {
-			self.tile = self.tile.left;
-			self.camera.update();
+			self.target = self.tile.left;
 		}
 	};
 
 	this.moveRight = function() {
 		if(self.tile.right != null && !self.tile.right.solid) {
-			self.tile = self.tile.right;
-			self.camera.update();
+			self.target = self.tile.right;
 		}
 	};
 }
