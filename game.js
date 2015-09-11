@@ -41,7 +41,7 @@ function init() {
 
 	var monsterGen = new MonsterGenerator(room, monstersToSpawn, ctx, Content.monster);
 	monsters = monsterGen.generate();
-	
+
 	player = new Player(start_tile, Content.player);
 	start_tile.apply_light(1, "rgba(0, 0, 0, 1)", "center", 1);
 }
@@ -58,9 +58,9 @@ function update() {
 
 	if(update_current <= 0) {
 		// TODO: Update logic
-		/*for(var i = 0; i < monsters.length; i++) {
+		for(var i = 0; i < monsters.length; i++) {
 			monsters[i].update();
-		}*/
+		}
 
 		update_current = update_delay;
 	} else {
