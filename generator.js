@@ -268,32 +268,32 @@ function DungeonFloor(width, height, room_density) {
 				var ty = (tile.y * 2) + 1;
 
 				// Center
-				tiles[tx + (ty*self.w)] = new Tile(tx, ty, tile.solid?Content.wall:Content.floor, tile.solid, !tile.solid);
+				tiles[tx + (ty*self.w)] = new Tile(tx, ty, tile.solid?Content.wall:Content.door, tile.solid, !tile.solid);
 
 				// Right
-				tiles[(tx + 1) + (ty*self.w)] = new Tile(tx + 1, ty, tile.wr?Content.wall:Content.floor, tile.wr, !tile.wr);
+				tiles[(tx + 1) + (ty*self.w)] = new Tile(tx + 1, ty, tile.wr?Content.wall:Content.door, tile.wr, !tile.wr);
 				// Bottom Right
-				tiles[(tx + 1) + ((ty + 1)*self.w)] = new Tile(tx + 1, ty + 1, tile.wdr?Content.wall:Content.floor, tile.wdr, !tile.wdr);
+				tiles[(tx + 1) + ((ty + 1)*self.w)] = new Tile(tx + 1, ty + 1, tile.wdr?Content.wall:Content.door, tile.wdr, !tile.wdr);
 				// Bottom
-				tiles[tx + ((ty + 1)*self.w)] = new Tile(tx, ty + 1, tile.wd?Content.wall:Content.floor, tile.wd, !tile.wd);
+				tiles[tx + ((ty + 1)*self.w)] = new Tile(tx, ty + 1, tile.wd?Content.wall:Content.door, tile.wd, !tile.wd);
 
 				if(x == 0) {
 					// Left
-					tiles[(tx - 1) + (ty*self.w)] = new Tile(tx - 1, ty, tile.wl?Content.wall:Content.floor, tile.wl, !tile.wl);
+					tiles[(tx - 1) + (ty*self.w)] = new Tile(tx - 1, ty, tile.wl?Content.wall:Content.door, tile.wl, !tile.wl);
 					// Bottom Left
-					tiles[(tx - 1) + ((ty + 1)*self.w)] = new Tile(tx - 1, ty + 1, tile.wdl?Content.wall:Content.floor, tile.wdl, !tile.wdl);
+					tiles[(tx - 1) + ((ty + 1)*self.w)] = new Tile(tx - 1, ty + 1, tile.wdl?Content.wall:Content.door, tile.wdl, !tile.wdl);
 				}
 
 				if(y == 0) {
 					// Top
-					tiles[tx + ((ty - 1)*self.w)] = new Tile(tx, ty - 1, tile.wu?Content.wall:Content.floor, tile.wu, !tile.wu);
+					tiles[tx + ((ty - 1)*self.w)] = new Tile(tx, ty - 1, tile.wu?Content.wall:Content.door, tile.wu, !tile.wu);
 					// Top Right
-					tiles[(tx + 1) + ((ty - 1)*self.w)] = new Tile(tx + 1, ty - 1, tile.wur?Content.wall:Content.floor, tile.wur, !tile.wur);
+					tiles[(tx + 1) + ((ty - 1)*self.w)] = new Tile(tx + 1, ty - 1, tile.wur?Content.wall:Content.door, tile.wur, !tile.wur);
 				}
 
 				if(x == 0 && y == 0) {
 					// Top Left
-					tiles[(tx - 1) + ((ty - 1)*self.w)] = new Tile(tx - 1, ty - 1, tile.wul?Content.wall:Content.floor, tile.wul, !tile.wul);
+					tiles[(tx - 1) + ((ty - 1)*self.w)] = new Tile(tx - 1, ty - 1, tile.wul?Content.wall:Content.door, tile.wul, !tile.wul);
 				}
 			}
 		}

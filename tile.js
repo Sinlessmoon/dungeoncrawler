@@ -50,41 +50,29 @@ function Tile(x, y, image, solid, transparent) {
 		if(self.right) self.right.clear_light();
 	};
 
-	this.apply_light = function(light, color, source) {
-		if(light <= 0.1 || light < self.light) return;
+	this.apply_light = function(light, color, source, count) {
+		if(light <= 0.05 || light < self.light) return;
 
 		self.light_color = color;
 		self.light = light;
-		light /= 1.3;
+		self.lit = true;
 
-		if(self.right && self.right.transparent) self.right.apply_light(light, color, "left");
-		if(self.up && self.up.transparent) self.up.apply_light(light, color, "down");
-		if(self.left && self.left.transparent) self.left.apply_light(light, color, "right");
-		if(self.down && self.down.transparent) self.down.apply_light(light, color, "up");
+		light /= count / 1.9;
+		light = clamp(light, 0, 0.95);
 
-		/*switch(source) {
-			case "left":
-				if(self.right && self.right.transparent) self.right.apply_light(light, color, "left");
-				if(self.up && self.up.transparent) self.up.apply_light(light, color, "down");
-				break;
-			case "right":
-				if(self.left && self.left.transparent) self.left.apply_light(light, color, "right");
-				if(self.down && self.down.transparent) self.down.apply_light(light, color, "up");
-				break;
-			case "up":
-				if(self.up && self.up.transparent) self.up.apply_light(light, color, "down");
-				if(self.right && self.right.transparent) self.right.apply_light(light, color, "left");
-				break;
-			case "down":
-				if(self.down && self.down.transparent) self.down.apply_light(light, color, "up");
-				if(self.left && self.left.transparent) self.left.apply_light(light, color, "right");
-				break;
-			case "center":
-				if(self.up && self.up.transparent) self.up.apply_light(light, color, "down");
-				if(self.down && self.down.transparent) self.down.apply_light(light, color, "up");
-				if(self.left && self.left.transparent) self.left.apply_light(light, color, "right");
-				if(self.right && self.right.transparent) self.right.apply_light(light, color, "left");
-				break;
-		}*/
+		if(self.transparent) {
+			if(self.right) {
+				self.right.apply_light(light, color, "left", count + 1);
+			}
+			if(self.up) {
+				self.up.apply_light(light, color, "down", count + 1);
+			}
+			if(self.left) {
+				self.left.apply_light(light, color, "right", count + 1);
+			}
+			if(self.down) {
+				self.down.apply_light(light, color, "up", count + 1);
+			}
+		}
 	};
 }

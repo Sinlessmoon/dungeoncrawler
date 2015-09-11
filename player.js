@@ -34,10 +34,11 @@ function Player(tile, image) {
 
 			if(self.x == self.target.dx && self.y == self.target.dy) self.tile = self.target;
 			for(var i = 0; i < floor.tiles.length; i++) {
-				floor.tiles[i].light = 0;
-				floor.tiles[i].lit = false;
+				if(floor.tiles[i].lit) floor.tiles[i].light = 0.3;
+				else floor.tiles[i].light = 0;
+				floor.tiles[i].light_color = "rgba(0, 0, 0, 1)";
 			}
-			self.tile.apply_light(1, "rgba(0, 0, 0, 1)", "center");
+			self.tile.apply_light(1, "rgba(0, 0, 0, 1)", "center", 1);
 		} else {
 			if(keyboard.IsKeyDown(Keys.Left)) {
 				self.moveLeft();

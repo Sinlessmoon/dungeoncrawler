@@ -37,6 +37,7 @@ function init() {
 		}
 	}
 	player = new Player(start_tile, Content.player);
+	start_tile.apply_light(1, "rgba(0, 0, 0, 1)", "center", 1);
 }
 
 function main() {
