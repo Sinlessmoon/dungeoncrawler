@@ -5,7 +5,8 @@ of monsters with very little effort. Just gotta make sure it has all the right v
 function Monster(tile, image)
 {
 	 var self = this;
-
+	 var x;
+	 var dir = null;
 	 this.tile = tile;
 	 this.image = image;
 
@@ -17,7 +18,16 @@ function Monster(tile, image)
 		while(canMoveToTile != true){
 
 			//For Reference: 1 = left, 2 = up, 3 = down, 4 = right
-			var x = rand(1, 4);
+			
+			 x = rand(1, 4);
+			 
+			 if(dir != null)
+			 {	 	
+			 	if(self.randomPrecentage() >= 80)
+			 	{
+			 		x = dir;
+			 	}
+			 }
 
 			switch(x)
 			{
@@ -25,6 +35,7 @@ function Monster(tile, image)
 					if(self.tile.left != null && !self.tile.left.solid) 
 						{
 							self.tile = self.tile.left;
+							dir = 1;
 							canMoveToTile = true;
 						}
 					break;
@@ -33,6 +44,7 @@ function Monster(tile, image)
 				if(self.tile.up != null && !self.tile.up.solid) 
 						{
 							self.tile = self.tile.up;
+							dir = 2;
 							canMoveToTile = true;
 						}
 					break;
@@ -41,6 +53,7 @@ function Monster(tile, image)
 				if(self.tile.down != null && !self.tile.down.solid) 
 						{
 							self.tile = self.tile.down;
+							dir = 3;
 							canMoveToTile = true;
 						}
 					break;
@@ -49,6 +62,7 @@ function Monster(tile, image)
 				if(self.tile.right != null && !self.tile.right.solid) 
 						{
 							self.tile = self.tile.right;
+							dir = 4;
 							canMoveToTile = true;
 						}
 					break;
@@ -56,6 +70,13 @@ function Monster(tile, image)
 		}
 
 	};
+
+	this.randomPrecentage = function()
+	{
+		var precent = rand(1, 100);
+
+		return precent;
+	}
 
 	this.spawn = function() {
 
@@ -65,7 +86,7 @@ function Monster(tile, image)
 
 	this.draw = function(ctx) {
 
-		ctx.drawImage(self.image, self.tile.x, self.tile.y);
+		ctx.drawImage(self.image, self.tile.dx, self.tile.dy);
 
 	};
 }

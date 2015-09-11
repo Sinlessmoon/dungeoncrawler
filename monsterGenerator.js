@@ -1,8 +1,8 @@
-function MonsterGenerator(floor, amount, ctx, image)
+function MonsterGenerator(room, amount, ctx, image)
 {
 	var self = this;
 
-	this.floor = floor
+	this.room = room
 	this.amount = amount;
 	this.ctx = ctx;
 	this.image = image;
@@ -30,7 +30,7 @@ function MonsterGenerator(floor, amount, ctx, image)
 
 		while(TileFound != true)
 		{
-			var randTile = self.floor.tiles[rand(1, 3000)];
+			var randTile = self.room.tiles[rand(1, 3000)];
 			var tile;
 
 			if(randTile.solid == false)

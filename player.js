@@ -33,10 +33,10 @@ function Player(tile, image) {
 			self.camera.update();
 
 			if(self.x == self.target.dx && self.y == self.target.dy) self.tile = self.target;
-			for(var i = 0; i < floor.tiles.length; i++) {
-				if(floor.tiles[i].lit) floor.tiles[i].light = 0.3;
-				else floor.tiles[i].light = 0;
-				floor.tiles[i].light_color = "rgba(0, 0, 0, 1)";
+			for(var i = 0; i < room.tiles.length; i++) {
+				if(room.tiles[i].lit) room.tiles[i].light = 0.3;
+				else room.tiles[i].light = 0;
+				room.tiles[i].light_color = "rgba(0, 0, 0, 1)";
 			}
 			self.tile.apply_light(1, "rgba(0, 0, 0, 1)", "center", 1);
 		} else {

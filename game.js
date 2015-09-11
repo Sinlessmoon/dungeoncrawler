@@ -31,16 +31,17 @@ function init() {
 
 	room = new DungeonFloor(LEVEL_W, LEVEL_H, 500);
 
-	var start_tile = floor.tiles[0];
-	for(var i = 0; i < floor.tiles.length; i++) {
-		if(!floor.tiles[i].solid) {
-			start_tile = floor.tiles[i];
+	var start_tile = room.tiles[0];
+	for(var i = 0; i < room.tiles.length; i++) {
+		if(!room.tiles[i].solid) {
+			start_tile = room.tiles[i];
 			break;
 		}
 	}
 
-	monsters = new MonsterGenerator(floor, monstersToSpawn, ctx, Content.monster);
-
+	var monsterGen = new MonsterGenerator(room, monstersToSpawn, ctx, Content.monster);
+	monsters = monsterGen.generate();
+	
 	player = new Player(start_tile, Content.player);
 	start_tile.apply_light(1, "rgba(0, 0, 0, 1)", "center", 1);
 }
@@ -80,8 +81,8 @@ function draw() {
 	shadows.width = LEVEL_W*32;
 	shadows.height = LEVEL_H*32;
 	var sctx = shadows.getContext('2d');
-	for(var i = 0; i < floor.tiles.length; i++) {
-		floor.tiles[i].draw(ctx, sctx);
+	for(var i = 0; i < room.tiles.length; i++) {
+		room.tiles[i].draw(ctx, sctx);
 	}
 
 	for(var i = 0; i < monsters.length; i++){
