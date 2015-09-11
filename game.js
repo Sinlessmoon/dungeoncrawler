@@ -7,7 +7,7 @@ var FPS = 60;
 var canvas, ctx;
 var keyboard;
 
-var floor;
+var room;
 
 var player;
 
@@ -27,7 +27,7 @@ function init() {
 	Content.add_image("monster", "./image/monster.png");
 	Content.finalize();
 
-	floor = new DungeonFloor(LEVEL_W, LEVEL_H, 500);
+	room = new DungeonFloor(LEVEL_W, LEVEL_H, 500);
 
 	var start_tile = floor.tiles[0];
 	for(var i = 0; i < floor.tiles.length; i++) {
