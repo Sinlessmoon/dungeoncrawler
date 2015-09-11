@@ -65,7 +65,7 @@ function Monster(tile, image)
 
 	this.draw = function(ctx) {
 
-		ctx.drawImage(self.image, self.tile.dx, self.tile.dy);
+		ctx.drawImage(self.image, self.tile.x, self.tile.y);
 
 	};
 }

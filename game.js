@@ -10,6 +10,8 @@ var keyboard;
 var room;
 
 var player;
+var monsters = [];
+var monstersToSpawn = 10;
 
 var update_delay = 0.5 * FPS;
 var update_current = update_delay;
@@ -36,6 +38,9 @@ function init() {
 			break;
 		}
 	}
+
+	monsters = new MonsterGenerator(floor, monstersToSpawn, ctx, Content.monster);
+
 	player = new Player(start_tile, Content.player);
 	start_tile.apply_light(1, "rgba(0, 0, 0, 1)", "center", 1);
 }
@@ -79,9 +84,9 @@ function draw() {
 		floor.tiles[i].draw(ctx, sctx);
 	}
 
-	/*for(var i = 0; i < monsters.length; i++){
+	for(var i = 0; i < monsters.length; i++){
 		monsters[i].draw(ctx);
-	}*/
+	}
 
 	player.draw(ctx);
 	ctx.drawImage(shadows, 0, 0);
